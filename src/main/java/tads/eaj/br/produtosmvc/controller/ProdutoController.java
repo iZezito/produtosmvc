@@ -2,10 +2,12 @@ package tads.eaj.br.produtosmvc.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import tads.eaj.br.produtosmvc.model.Produto;
 import tads.eaj.br.produtosmvc.service.ProdutoService;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -26,16 +28,21 @@ public class ProdutoController {
     }
 
     @RequestMapping("/cadastrar")
-    public String getCadastar(Model model){
+    public String getCadastar(Model model ){
         Produto p = new Produto();
         model.addAttribute("produto", p);
         return "cadastrar";
     }
 
     @RequestMapping(value = "/salvar", method = RequestMethod.POST)
-    public String doSalvar(@ModelAttribute Produto p){
-        service.create(p);
-        return "redirect:/";
+    public String doSalvar(@ModelAttribute @Valid Produto p, Errors errors){
+        if(errors.hasErrors()){
+            return "cadastrar";
+        }else{
+            service.create(p);
+            return "redirect:/";
+        }
+
     }
 
     @RequestMapping("/deletar/{id}")

@@ -5,12 +5,12 @@
     <title>Title</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
-
-<p>
-    <a href="/cadastrar" class="nav-link">Cadastrar</a>
-</p>
+<div class="d-flex justify-content-center w-100">
+    <h1 class="h1">Lista de Produtos</h1>
+</div>
 
 <table class="table">
     <thead>
@@ -25,13 +25,22 @@
     <tbody>
     <tr th:each="p : ${produtosList}" th:object="${p}">
         <td th:text="*{nome}"></td>
-        <td th:text="*{descricao}"></td>
+        <td class="text-break" th:text="*{descricao}"></td>
         <td th:text="*{preco}"></td>
-        <td><a th:href="@{'/editar/'+ *{id}}" class="nav-link">Editar</a></td>
-        <td><a th:href="@{'/deletar/'+ *{id}}" class="nav-link">Deletar</a></td>
+        <td><a th:href="@{'/editar/'+ *{id}}"><svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+                                                   width="24" height="24"
+                                                   viewBox="0 0 24 24"
+                                                   style=" fill:#000000;">    <path d="M 18.414062 2 C 18.158062 2 17.902031 2.0979687 17.707031 2.2929688 L 15.707031 4.2929688 L 14.292969 5.7070312 L 3 17 L 3 21 L 7 21 L 21.707031 6.2929688 C 22.098031 5.9019687 22.098031 5.2689063 21.707031 4.8789062 L 19.121094 2.2929688 C 18.926094 2.0979687 18.670063 2 18.414062 2 z M 18.414062 4.4140625 L 19.585938 5.5859375 L 18.292969 6.8789062 L 17.121094 5.7070312 L 18.414062 4.4140625 z M 15.707031 7.1210938 L 16.878906 8.2929688 L 6.171875 19 L 5 19 L 5 17.828125 L 15.707031 7.1210938 z"></path></svg></td></a>
+        <td><a th:href="@{'/deletar/'+ *{id}}" ><svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+                                                                     width="24" height="24"
+                                                                     viewBox="0 0 172 172"
+                                                                     style=" fill:#000000;"><g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"><path d="M0,172v-172h172v172z" fill="none"></path><g fill="#ff0000"><path d="M71.66667,14.33333l-7.16667,7.16667h-35.83333v14.33333h7.16667v107.5c0,3.74259 1.37119,7.55804 4.07324,10.26009c2.70205,2.70205 6.5175,4.07324 10.26009,4.07324h71.66667c3.74259,0 7.55804,-1.37119 10.26009,-4.07324c2.70205,-2.70206 4.07324,-6.5175 4.07324,-10.26009v-107.5h7.16667v-14.33333h-35.83333l-7.16667,-7.16667zM50.16667,35.83333h71.66667v107.5h-71.66667zM64.5,50.16667v78.83333h14.33333v-78.83333zM93.16667,50.16667v78.83333h14.33333v-78.83333z"></path></g></g></svg></a></td>
     </tr>
     </tbody>
 </table>
-
+<p class="position-absolute bottom-0 end-0">
+    <a href="/cadastrar"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAAABmJLR0QA/wD/AP+gvaeTAAAFfUlEQVR4nO2dSW8cRRiGn/FgBwlsghEnsAWJsc2SHwH4SMQSjAiBgMSBIydEjOAGBAQCIRZxRYgE8Q8QAUesAaRIiAOJ4yxOuCUYKw4SDniGw9eDnHF1T013bd1dj/RqrPFM91dvTXdV11ddDZFIJBKpKw3fAWTQBKaAaWAy+XsSGAauAa5PXgH+Av5MXi8CC4mOA8eSv9cdxq5NaBWwDZhJdC8wami7l4AjwKFER4G2oW2XnnHgeeAEYooLnQVeA25zUL4guQp4HPgOd6ar1AK+BfYkMVWeIWAvcm72abxKp4Fngautld4jDeBJ4Hf8G91L54AnCK99zM0U8AX+je1XXwN3WfDDGUPA68A/+Dczry4D+4FBw95YZxz4Hv8GmtLPSBe5FNwPLOPfNNNaAWYN+mSFF5GunW+zbKkFzBlzyyAN4E38G+RK7wIDRpwzwBBwEP+muNaBpOxeGQA+xb8ZvnQQz0fC24qg6qb3C7uYk5c0A6yDnDfMO6l2b6dftYAHCjnaB+PAH5YLVEYtA7cW8FWLQap1hWtaP9Jnz6jZz4eRcZFH+/xOnbgJySt8aWPjOwhnYO0ssAvJDw8DDyK5X99xtZEBvDtyepxKAxme9V24jvmqXPEoMpbvO742MI/hfMJTARSqo10Zcc4GEF9HezR81WILYWWyhjNiHQkgvo6WMDRU8UwAhdmoXviOb6Oe1og3kyZup4tUrQIW6THbotdA0m5gQqPQETXbgUeKbMD3vJ2yHwFtpPeYiwnCHO/phe/4utVCjgQlWaegvVRoboxHGsgswNR/pr1/EgeDSzno9aPQOUpcs4jM7N4UW9oRsIMwzS8rE8Dtqn+kVcDd9mKpLfeo3owV4A6lp6rzaRM4j9yBEiJlbANAEjY3Ir2i/1EdAVOEa36ZGUUa4itQVcC0/Vhqy1T3G2lHQMQOsQI8o1UBqZfNkcJsGthUVcBWCzs+BzyMJEwaBdWLotsfAR5C7mMzjZa3pzE7GJWWww0dGznmUzo7vmB4p1k53NAxnWM+r7PTNcM7zcrhho7pHPPf3TsI5iaDQLE+HK+qgFXD+5gxvD2XmI5dy1vTjfAxytsIL+ChEf7V8E7bSG9iFjmnhs4I0nEwbX4b+KV7Z6opEysmS5NwM/CZoW2VdTQUFN6q2oBFB4HUlRPdb6gqwMYVYETY5G2sALfECvDMQvcbMSXpDu2U5DoFptNFUpmny3xIH4qYtxtLLVF6mlYBX1kMpK705WlnaqLpK0ET6oXv+FTa1Ph2SDsC2sDHGoWN6JHLy+3E6ekm1CJjubOsfMBJ4AeNAkey+YaMUdBeCZkPzMZSSz4s8uUmdoZl63IKKnyT3jqyFlwkH68A/xbdyBDhLAHQJjvJf10A8XV0Bo0FX3WS8peBFzQ+54qsPG1I+ed9yOImRmgAh/H/q2qTnmO2kcPNKyvL1dyJHA2+C9fmyhyzzRxuHq1hcYr//gAKGLpezu2uBoOEefd8KDqCg8VcxzA/f7QKWgZuKeBrX9xHmONEvtRCVo13ypyBwKui5wp6mZu3NAOsst4r7GIBGsBHiqDqogMEMMN8KAnEtxmu9QkBPVumAbyBf1Nc6R0C+OWrmKPavaMWHhtcXXZSzcW9VyjR/W5jVOuK+SdKuH7SIPAq4Qzg5dEaMrYTTGObh0ngc/yb2a8OIyPAlaCBrKW8hH9je+kMFV6ifxBZjTGUpeY36hTyONst1kofEE3gMWTOjM9uawuZCb6b/h9mURnGkEeau8xoLSGPNPe+LHNoC7NuQxLrM8gqgzcY2u4q8nyXQ4mOIhXhndAqYCMDSA9qOnmdSl47jy3ZClybfPYScqG0mug4ckQtAL8hdyduujkiEolEIhGf/AdtHI6tE/ymGAAAAABJRU5ErkJggg=="/></a>
+    </a>
+</p>
 </body>
 </html>
