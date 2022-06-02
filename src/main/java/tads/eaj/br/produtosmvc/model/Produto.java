@@ -3,9 +3,11 @@ package tads.eaj.br.produtosmvc.model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import tads.eaj.br.produtosmvc.errorhandling.ApiMessages;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 
 @Entity
@@ -21,6 +23,6 @@ public class Produto {
     String nome;
     @NotBlank(message = ApiMessages.ERRO_VAZIO)
     String descricao;
-    @NotBlank(message = ApiMessages.ERRO_VAZIO)
-    String preco;
+    @Min(0)
+    Float preco;
 }
